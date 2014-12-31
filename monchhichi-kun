@@ -1,0 +1,1442 @@
+Skip to content 
+
+
+  
+
+  
+This repository
+
+Explore
+
+
+Gist
+
+
+Blog
+
+
+Help
+
+
+monchhichi-kun monchhichi-kun  
+
+
+  Create new...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  You have no unread notifications
+
+
+ Settings
+
+
+ 
+ Sign out
+
+
+
+
+You don't have any verified emails. We recommend verifying at least one email. 
+
+Email verification helps our support team verify ownership if you lose account access and allows you to receive all the notifications you ask for. 
+
+
+
+
+
+
+
+
+  
+5   Watch   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  Star  72  
+
+ Fork  81 
+
+ loo2k/liumeijun.com  
+  
+
+
+
+
+   
+Code
+
+    
+Issues
+
+    
+Pull Requests
+
+   
+Wiki
+
+
+   
+Pulse
+
+   
+Graphs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+  
+
+ branch: master  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+ Quickly jump between files  
+
+liumeijun.com / index.html 
+
+
+LOO2K loo2k on Feb 20 初始化项目  
+
+
+1 contributor  
+
+
+
+LOO2K
+
+
+
+
+1223 lines (1191 sloc)  29.551 kb 
+
+
+Raw Blame History 
+  Open this file in GitHub for Windows Clicking this button will fork this project so you can edit the file  Fork this project and delete file  
+
+1 <!DOCTYPE HTML> 
+2 <html lang="en-US"> 
+3 <head> 
+4     <meta charset="UTF-8"> 
+5     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> 
+6     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> 
+7     <title>Hello Meijun!</title> 
+8     <style type="text/css"> 
+9 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {  
+10     margin:0; 
+11     padding:0; 
+12 } 
+13 table { 
+14     border-collapse:collapse; 
+15     border-spacing:0; 
+16 } 
+17 fieldset,img {  
+18     border:0; 
+19 } 
+20 address,caption,cite,code,dfn,em,strong,th,var { 
+21     font-style:normal; 
+22     font-weight:normal; 
+23 } 
+24 ol,ul { 
+25     list-style:none; 
+26 } 
+27 caption,th { 
+28     text-align:left; 
+29 } 
+30 h1,h2,h3,h4,h5,h6 { 
+31     font-size:100%; 
+32     font-weight:bold; 
+33 } 
+34 q:before,q:after { 
+35     content:''; 
+36 } 
+37 abbr,acronym { border:0; 
+38 } 
+39  
+40 body, html { 
+41     height: 100%; 
+42     width: 100%; 
+43 } 
+44  
+45 /* Common 定义基本样式 */ 
+46 body { 
+47     font: 12px/1.8 'Microsoft Yahei','Helvetica Neue',Helvetica,Arial,Sans-serif; 
+48     padding: 0; 
+49     margin: 0; 
+50     color: #333333; 
+51 } 
+52  
+53 #map { 
+54     height: 100%; 
+55     width: 100%; 
+56 } 
+57  
+58 #loading { 
+59     height: 100%; 
+60     width: 100%; 
+61     position: absolute; 
+62     z-index: 999; 
+63     background: url("http://lukesign.qiniudn.com/images/site/loading.gif") no-repeat center center #FFFAD1; 
+64     top: 0; 
+65     left: 0; 
+66     text-align: center; 
+67     line-height: 300px; 
+68     font-size: 32px; 
+69     color: #666; 
+70 } 
+71 #theEnd { 
+72     height: 0%; 
+73     width: 100%; 
+74     line-height: 0; 
+75     font-size: 0; 
+76     overflow: hidden; 
+77     position: absolute; 
+78     z-index: 999; 
+79     background-color: #FFFAD1; 
+80     top: 0; 
+81     left: 0; 
+82 } 
+83  
+84 #theEndText { 
+85     position: absolute; 
+86     left: 0; 
+87     z-index: 9999; 
+88     width: 100%; 
+89     text-align: center; 
+90     font-size: 26px; 
+91     line-height: 2; 
+92     top: 50%; 
+93     margin-top: -100px; 
+94     height: 200px; 
+95 } 
+96     </style> 
+97 </head> 
+98 <body> 
+99     <div id="loading">正在加载...</div> 
+100     <div id="theEnd"></div> 
+101     <div id="map"></div> 
+102 
+ 
+103 <!-- 指定全局的分享内容 --> 
+104 <input id="wsContent" type="hidden" value="一个送给美君的生日礼物，也是送给所有异地恋人的礼物「变得是距离，不变的是坚持」。 via @LOO2K"> 
+105 <!-- 指定全局的分享链接 --> 
+106 <input id="wsUrl" type="hidden" value="http://liumeijun.com/"> 
+107 <!-- 指定全局的分享图片 --> 
+108 <input id="wsPic" type="hidden" value="http://lukesign.qiniudn.com/social.png"> 
+109 
+ 
+110 <script type="text/javascript" src="http://lukesign.qiniudn.com/jquery.min.js"></script> 
+111 <script type="text/javascript" src="http://lukesign.qiniudn.com/jquery.wshare.js"></script> 
+112 <script type="text/javascript" src="http://lukesign.qiniudn.com/sm/soundmanager2-nodebug-jsmin.js"></script> 
+113 <script type="text/javascript"> 
+114 (function(a,b){"use strict";var c=function(){var a=[["requestFullscreen","exitFullscreen","fullscreenchange","fullscreen","fullscreenElement"],["webkitRequestFullScreen","webkitCancelFullScreen","webkitfullscreenchange","webkitIsFullScreen","webkitCurrentFullScreenElement"],["mozRequestFullScreen","mozCancelFullScreen","mozfullscreenchange","mozFullScreen","mozFullScreenElement"]];for(var c=0,d=a.length;c<d;c++){var e=a[c];if(e[1]in b)return e}}();if(!c)return a.screenfull=!1;var d="ALLOW_KEYBOARD_INPUT"in Element,e={init:function(){return b.addEventListener(c[2],function(a){e.isFullscreen=b[c[3]],e.element=b[c[4]],e.onchange(a)}),this},isFullscreen:b[c[3]],element:b[c[4]],request:function(a){a=a||b.documentElement,a[c[0]](d&&Element.ALLOW_KEYBOARD_INPUT),b.isFullscreen||a[c[0]]()},exit:function(){b[c[1]]()},toggle:function(a){this.isFullscreen?this.exit():this.request(a)},onchange:function(){}};a.screenfull=e.init()})(window,document) 
+115 </script> 
+116 <script type="text/javascript"> 
+117  
+118 /* 
+119  * 常用变量 
+120  * 梅州嘉应学院： 116.135018,24.33438 
+121  * 广州广外艺：   113.345774,23.153356 
+122  * 426 KM 
+123  * 5H 
+124  */ 
+125 // 初始化地图中心 
+126 var MP_CEN = {lng: 3.894763, lat: 44.529534}; 
+127 // 中国中心 
+128 var CN_CEN = {lng: 103.758427, lat: 36.172333}; 
+129 // 嘉应学院 
+130 var MZ_JYU = {lng: 116.135018, lat: 24.33438}; 
+131 // 广外艺 
+132 var GZ_GTC = {lng: 113.345774, lat: 23.153356}; 
+133 // 广州市 
+134 var GD_GZS = {lng: 113.256838, lat: 23.157309}; 
+135 // 河源市 
+136 var GD_HYS = {lng: 114.701682, lat: 23.754195}; 
+137 // 背景音乐 
+138 var MUSIC; 
+139  
+140 function zoomTo(zoom, time, callback, point) { 
+141     var time     = time || 1000; 
+142     var callback = callback || function() {}; 
+143     var loop     = ''; 
+144     function loopZoom() { 
+145         var curZoom  = map.getZoom(); 
+146         if( curZoom == zoom ) { 
+147             clearTimeout(loop); 
+148             callback(); 
+149             return false; 
+150         } 
+151         var plus    = curZoom > zoom ? -1 : 1; 
+152         var toZoom  = curZoom + plus; 
+153         map.setZoom(toZoom); 
+154         if( point ) { 
+155             map.setCenter(point); 
+156         } 
+157         var center = map.getCenter(); 
+158         loop = setTimeout(loopZoom, time); 
+159     } 
+160     loopZoom(); 
+161 } 
+162  
+163 function loopWin(loopList, time, callback) { 
+164     var i    = 0; 
+165     var len  = loopList.length; 
+166     var callback = callback || function () {}; 
+167     var timeout = ''; 
+168  
+169     function loopWinInner() { 
+170         if( i == len ) { 
+171             clearTimeout(timeout); 
+172             setTimeout(callback, 1000); 
+173             return false; 
+174         } 
+175  
+176         var opts = { 
+177             title: loopList[i].title, 
+178             maxWidth: 600, 
+179             height: 0 
+180         } 
+181         var infoWindow = new BMap.InfoWindow(loopList[i].content, opts); 
+182         map.openInfoWindow(infoWindow, new BMap.Point(loopList[i].point.lng, loopList[i].point.lat)); 
+183         infoWindow.redraw(); 
+184         i++; 
+185         if( loopList[i] ) { 
+186             var time = loopList[i].timeout || 2000; 
+187         } else { 
+188             var time = 2000; 
+189         } 
+190         timeout = setTimeout(loopWinInner, time); 
+191     } 
+192  
+193     loopWinInner(); 
+194 } 
+195  
+196 function panZoom_GTC() { 
+197     map.panTo(new BMap.Point(GZ_GTC.lng, GZ_GTC.lat)); 
+198     setTimeout(function() { 
+199         zoomTo(18, 800, function() { 
+200             var marker = new BMap.Marker(GZ_GTC); 
+201             map.addOverlay(marker); 
+202             marker.setAnimation(BMAP_ANIMATION_BOUNCE); 
+203             setTimeout(panZoom_JYU, 1000); 
+204         }, GZ_GTC); 
+205     }, 800); 
+206 } 
+207  
+208 function panZoom_JYU() { 
+209     zoomTo(8, 1000, function() { 
+210         map.panTo(new BMap.Point(MZ_JYU.lng, MZ_JYU.lat)); 
+211         setTimeout(function() { 
+212             zoomTo(16, 800, function() { 
+213                 var marker = new BMap.Marker(MZ_JYU); 
+214                 map.addOverlay(marker); 
+215                 marker.setAnimation(BMAP_ANIMATION_BOUNCE); 
+216                 setTimeout(panZoom_HEY, 1000); 
+217             }); 
+218         }, 1000); 
+219     }); 
+220 } 
+221  
+222 function panZoom_HEY() { 
+223     zoomTo(9, 1000, function() { 
+224         map.panTo(new BMap.Point(GD_HYS.lng, GD_HYS.lat)); 
+225         setTimeout(function() { 
+226             var start = new BMap.Point(MZ_JYU.lng, MZ_JYU.lat); 
+227             var end   = new BMap.Point(GZ_GTC.lng, GZ_GTC.lat); 
+228             var driving2 = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: false}}); 
+229             driving2.search(start, end); 
+230             setTimeout(function() { 
+231                 var between = [ 
+232                     { 
+233                         title: '梅州 → 广州', 
+234                         content: '426 km.', 
+235                         point: MZ_JYU 
+236                     }, 
+237                     { 
+238                         title: '梅州 → 广州', 
+239                         content: '5 hours by train.', 
+240                         point: GZ_GTC 
+241                     }, 
+242                     { 
+243                         title: '变得是距离，不变的是坚持；', 
+244                         content: '<img src="http://lukesign.qiniudn.com/images/ticket.jpg" width="200" height="149" alt="ticket" />', 
+245                         point: MZ_JYU 
+246                     } 
+247                 ]; 
+248                 loopWin(between, 2000, showPhotos); 
+249             }, 2000); 
+250         }, 1000); 
+251     }); 
+252 } 
+253  
+254 function showPhotos() { 
+255     map.clearOverlays(); 
+256     map.panTo(new BMap.Point(GD_GZS.lng, GD_GZS.lat)); 
+257     setTimeout(function() { 
+258         zoomTo(13, 1000, function() { 
+259             var photos = [ 
+260                 { 
+261                     title: '纪念堂', 
+262                     content: '<img src="http://lukesign.qiniudn.com/images/jiniantang.jpg" width="500" height="373" alt="纪念堂" />', 
+263                     point: {lng: 113.271147, lat: 23.139616} 
+264                 }, 
+265                 { 
+266                     title: '陈家祠', 
+267                     content: '<img src="http://lukesign.qiniudn.com/images/chenjiaci.jpg" width="500" height="373" alt="陈家祠" />', 
+268                     point: {lng: 113.252764, lat: 23.131838} 
+269                 }, 
+270                 { 
+271                     title: '看电影', 
+272                     content: '<img src="http://lukesign.qiniudn.com/images/dianying.jpg" width="500" height="373" alt="看电影" />', 
+273                     point: {lng: 113.268865, lat: 23.200458} 
+274                 }, 
+275                 { 
+276                     title: '', 
+277                     content: '<img src="http://lukesign.qiniudn.com/images/chenjiaci1.jpg" width="500" height="373" alt="陈家祠" />', 
+278                     point: {lng: 113.252764, lat: 23.131838} 
+279                 }, 
+280                 { 
+281                     title: '吃货', 
+282                     content: '<img src="http://lukesign.qiniudn.com/images/beijingroad.jpg" width="280" height="375" alt="吃货" />', 
+283                     point: {lng: 113.275619, lat: 23.127547} 
+284                 }, 
+285                 { 
+286                     title: '', 
+287                     content: '<img src="http://lukesign.qiniudn.com/images/chenjiaci2.jpg" width="500" height="375" alt="陈家祠" />', 
+288                     point: {lng: 113.252764, lat: 23.131838} 
+289                 }, 
+290                 { 
+291                     title: '臭美中...', 
+292                     content: '<img src="http://lukesign.qiniudn.com/images/dress1.jpg" width="280" height="375" alt="臭美" />', 
+293                     point: {lng: 113.275619, lat: 23.127547} 
+294                 }, 
+295                 { 
+296                     title: '臭美中...', 
+297                     content: '<img src="http://lukesign.qiniudn.com/images/dress2.jpg" width="280" height="375" alt="臭美" />', 
+298                     point: {lng: 113.248583, lat: 23.123725} 
+299                 }, 
+300                 { 
+301                     title: '', 
+302                     content: '<img src="http://lukesign.qiniudn.com/images/you.jpg" width="499" height="373" alt="You" />', 
+303                     point: {lng: 113.340995, lat: 23.106222} 
+304                 }, 
+305                 { 
+306                     title: '又是离开，又是不舍...', 
+307                     content: '<img src="http://lukesign.qiniudn.com/images/leave.jpg" width="500" height="375" alt="离开" />', 
+308                     point: {lng: 113.358452, lat: 23.158306} 
+309                 }, 
+310                 { 
+311                     title: '红海湾', 
+312                     content: '<img src="http://lukesign.qiniudn.com/images/sea.jpg" width="500" height="375" alt="红海湾" />', 
+313                     point: {lng: 115.573511, lat: 22.712665} 
+314                 }, 
+315                 { 
+316                     title: '后山', 
+317                     content: '<img src="http://lukesign.qiniudn.com/images/s.jpg" width="500" height="375" alt="后山" />', 
+318                     point: {lng: 115.622433, lat: 23.184734} 
+319                 } 
+320             ]; 
+321             loopWin(photos, 2500, wannaTo); 
+322         }); 
+323     }, 1000); 
+324 } 
+325  
+326 function wannaTo() { 
+327     map.closeInfoWindow(); 
+328     zoomTo(5, 1000, function() { 
+329         map.panTo(new BMap.Point(CN_CEN.lng, CN_CEN.lat)); 
+330         map.setMapType(BMAP_HYBRID_MAP); 
+331         setTimeout(function() { 
+332             var wanna = [ 
+333                 { 
+334                     title: '', 
+335                     content: '地图标上想去的地方，有一天，带着你去流浪。', 
+336                     point: CN_CEN 
+337                 }, 
+338                 { 
+339                     title: '厦门', 
+340                     content: '<img src="http://lukesign.qiniudn.com/images/wannato/xiamen.jpg" width="500" height="338" alt="wannaTo" />', 
+341                     point: {lng: 118.148154, lat: 24.497912} 
+342                 }, 
+343                 { 
+344                     title: '凤凰古镇', 
+345                     content: '<img src="http://lukesign.qiniudn.com/images/wannato/fenghuang.jpg" width="500" height="337" alt="wannaTo" />', 
+346                     point: {lng: 100.21191, lat: 26.928061} 
+347                 }, 
+348                 { 
+349                     title: '桂林阳朔', 
+350                     content: '<img src="http://lukesign.qiniudn.com/images/wannato/guilin.jpg" width="499" height="399" alt="wannaTo" />', 
+351                     point: {lng: 110.503626, lat: 24.780932} 
+352                 }, 
+353                 { 
+354                     title: '西藏', 
+355                     content: '<img src="http://lukesign.qiniudn.com/images/wannato/xizang.jpg" width="500" height="400" alt="wannaTo" />', 
+356                     point: {lng: 91.115691, lat: 29.687083} 
+357                 }, 
+358                 { 
+359                     title: '杭州西湖', 
+360                     content: '<img src="http://lukesign.qiniudn.com/images/wannato/xihu.jpg" width="500" height="327" alt="wannaTo" />', 
+361                     point: {lng: 120.151946, lat: 30.250472} 
+362                 } 
+363             ]; 
+364         loopWin(wanna, 1000, showMarkerText); 
+365         }, 1000); 
+366     }); 
+367 } 
+368  
+369 var markerText = [ 
+370     { 
+371         lng : 80.050373, 
+372         lat : 39.924749 
+373     }, 
+374     { 
+375         lng : 80.064171, 
+376         lat : 39.832612 
+377     }, 
+378     { 
+379         lng : 80.064171, 
+380         lat : 39.747453 
+381     }, 
+382     { 
+383         lng : 80.054973, 
+384         lat : 39.647966 
+385     }, 
+386     { 
+387         lng : 80.031976, 
+388         lat : 39.566136 
+389     }, 
+390     { 
+391         lng : 80.022777, 
+392         lat : 39.469951 
+393     }, 
+394     { 
+395         lng : 79.990582, 
+396         lat : 39.366491 
+397     }, 
+398     { 
+399         lng : 79.93539, 
+400         lat : 39.273603 
+401     }, 
+402     { 
+403         lng : 79.875599, 
+404         lat : 39.216379 
+405     }, 
+406     { 
+407         lng : 80.165356, 
+408         lat : 39.697727 
+409     }, 
+410     { 
+411         lng : 80.289538, 
+412         lat : 39.70128 
+413     }, 
+414     { 
+415         lng : 80.427518, 
+416         lat : 39.708386 
+417     }, 
+418     { 
+419         lng : 80.537902, 
+420         lat : 39.708386 
+421     }, 
+422     { 
+423         lng : 80.666683, 
+424         lat : 39.711938 
+425     }, 
+426     { 
+427         lng : 80.795464, 
+428         lat : 39.715491 
+429     }, 
+430     { 
+431         lng : 80.123962, 
+432         lat : 39.402184 
+433     }, 
+434     { 
+435         lng : 80.271141, 
+436         lat : 39.420024 
+437     }, 
+438     { 
+439         lng : 80.418319, 
+440         lat : 39.423591 
+441     }, 
+442     { 
+443         lng : 80.570097, 
+444         lat : 39.423591 
+445     }, 
+446     { 
+447         lng : 80.726474, 
+448         lat : 39.427159 
+449     }, 
+450     { 
+451         lng : 80.873652, 
+452         lat : 39.434292 
+453     }, 
+454     { 
+455         lng : 81.039228, 
+456         lat : 39.434292 
+457     }, 
+458     { 
+459         lng : 80.501107, 
+460         lat : 40.105115 
+461     }, 
+462     { 
+463         lng : 80.501107, 
+464         lat : 40.01676 
+465     }, 
+466     { 
+467         lng : 80.501107, 
+468         lat : 39.921207 
+469     }, 
+470     { 
+471         lng : 80.501107, 
+472         lat : 39.829066 
+473     }, 
+474     { 
+475         lng : 80.496508, 
+476         lat : 39.623071 
+477     }, 
+478     { 
+479         lng : 80.496508, 
+480         lat : 39.544773 
+481     }, 
+482     { 
+483         lng : 80.491908, 
+484         lat : 39.370061 
+485     }, 
+486     { 
+487         lng : 80.491908, 
+488         lat : 39.255725 
+489     }, 
+490     { 
+491         lng : 80.491908, 
+492         lat : 39.166269 
+493     }, 
+494     { 
+495         lng : 80.491908, 
+496         lat : 39.087453 
+497     }, 
+498     { 
+499         lng : 79.820407, 
+500         lat : 39.015724 
+501     }, 
+502     { 
+503         lng : 79.949188, 
+504         lat : 39.008548 
+505     }, 
+506     { 
+507         lng : 80.100966, 
+508         lat : 39.030076 
+509     }, 
+510     { 
+511         lng : 80.252744, 
+512         lat : 39.030076 
+513     }, 
+514     { 
+515         lng : 80.41372, 
+516         lat : 39.030076 
+517     }, 
+518     { 
+519         lng : 80.611491, 
+520         lat : 39.051598 
+521     }, 
+522     { 
+523         lng : 80.744871, 
+524         lat : 39.05877 
+525     }, 
+526     { 
+527         lng : 80.924245, 
+528         lat : 39.05877 
+529     }, 
+530     { 
+531         lng : 81.089821, 
+532         lat : 39.073113 
+533     }, 
+534     { 
+535         lng : 81.517558, 
+536         lat : 39.775851 
+537     }, 
+538     { 
+539         lng : 81.517558, 
+540         lat : 39.708386 
+541     }, 
+542     { 
+543         lng : 81.512958, 
+544         lat : 39.605284 
+545     }, 
+546     { 
+547         lng : 81.512958, 
+548         lat : 39.480645 
+549     }, 
+550     { 
+551         lng : 81.494561, 
+552         lat : 39.38434 
+553     }, 
+554     { 
+555         lng : 81.494561, 
+556         lat : 39.262877 
+557     }, 
+558     { 
+559         lng : 81.632541, 
+560         lat : 39.81488 
+561     }, 
+562     { 
+563         lng : 81.738325, 
+564         lat : 39.811332 
+565     }, 
+566     { 
+567         lng : 81.867106, 
+568         lat : 39.811332 
+569     }, 
+570     { 
+571         lng : 82.018884, 
+572         lat : 39.804238 
+573     }, 
+574     { 
+575         lng : 82.018884, 
+576         lat : 39.704833 
+577     }, 
+578     { 
+579         lng : 82.023483, 
+580         lat : 39.598168 
+581     }, 
+582     { 
+583         lng : 82.023483, 
+584         lat : 39.502027 
+585     }, 
+586     { 
+587         lng : 82.028083, 
+588         lat : 39.395047 
+589     }, 
+590     { 
+591         lng : 82.023483, 
+592         lat : 39.320062 
+593     }, 
+594     { 
+595         lng : 82.018884, 
+596         lat : 39.24142 
+597     }, 
+598     { 
+599         lng : 81.853308, 
+600         lat : 39.219957 
+601     }, 
+602     { 
+603         lng : 81.696931, 
+604         lat : 39.230689 
+605     }, 
+606     { 
+607         lng : 81.56815, 
+608         lat : 39.234266 
+609     }, 
+610     { 
+611         lng : 81.63714, 
+612         lat : 39.530527 
+613     }, 
+614     { 
+615         lng : 81.765921, 
+616         lat : 39.530527 
+617     }, 
+618     { 
+619         lng : 81.903901, 
+620         lat : 39.530527 
+621     }, 
+622     { 
+623         lng : 82.621395, 
+624         lat : 40.020297 
+625     }, 
+626     { 
+627         lng : 82.621395, 
+628         lat : 39.921207 
+629     }, 
+630     { 
+631         lng : 82.621395, 
+632         lat : 39.811332 
+633     }, 
+634     { 
+635         lng : 82.621395, 
+636         lat : 39.708386 
+637     }, 
+638     { 
+639         lng : 82.616796, 
+640         lat : 39.605284 
+641     }, 
+642     { 
+643         lng : 82.621395, 
+644         lat : 39.459255 
+645     }, 
+646     { 
+647         lng : 82.621395, 
+648         lat : 39.35935 
+649     }, 
+650     { 
+651         lng : 82.607598, 
+652         lat : 39.24142 
+653     }, 
+654     { 
+655         lng : 82.607598, 
+656         lat : 39.159108 
+657     }, 
+658     { 
+659         lng : 82.483416, 
+660         lat : 39.647966 
+661     }, 
+662     { 
+663         lng : 82.446621, 
+664         lat : 39.555455 
+665     }, 
+666     { 
+667         lng : 82.391429, 
+668         lat : 39.469951 
+669     }, 
+670     { 
+671         lng : 82.736379, 
+672         lat : 39.687067 
+673     }, 
+674     { 
+675         lng : 82.79617, 
+676         lat : 39.59461 
+677     }, 
+678     { 
+679         lng : 82.846762, 
+680         lat : 39.519841 
+681     }, 
+682     { 
+683         lng : 82.984742, 
+684         lat : 39.829066 
+685     }, 
+686     { 
+687         lng : 83.122722, 
+688         lat : 39.832612 
+689     }, 
+690     { 
+691         lng : 83.260702, 
+692         lat : 39.836158 
+693     }, 
+694     { 
+695         lng : 83.398681, 
+696         lat : 39.846795 
+697     }, 
+698     { 
+699         lng : 83.486068, 
+700         lat : 39.860975 
+701     }, 
+702     { 
+703         lng : 83.509065, 
+704         lat : 39.775851 
+705     }, 
+706     { 
+707         lng : 83.495267, 
+708         lat : 39.694174 
+709     }, 
+710     { 
+711         lng : 83.47227, 
+712         lat : 39.626628 
+713     }, 
+714     { 
+715         lng : 82.966345, 
+716         lat : 39.544773 
+717     }, 
+718     { 
+719         lng : 83.150318, 
+720         lat : 39.551895 
+721     }, 
+722     { 
+723         lng : 83.283698, 
+724         lat : 39.551895 
+725     }, 
+726     { 
+727         lng : 83.426277, 
+728         lat : 39.559016 
+729     }, 
+730     { 
+731         lng : 83.578055, 
+732         lat : 39.559016 
+733     }, 
+734     { 
+735         lng : 83.711435, 
+736         lat : 39.569696 
+737     }, 
+738     { 
+739         lng : 83.2699, 
+740         lat : 40.140424 
+741     }, 
+742     { 
+743         lng : 83.251503, 
+744         lat : 40.066253 
+745     }, 
+746     { 
+747         lng : 83.237705, 
+748         lat : 39.97077 
+749     }, 
+750     { 
+751         lng : 83.187112, 
+752         lat : 39.754553 
+753     }, 
+754     { 
+755         lng : 83.145718, 
+756         lat : 39.658632 
+757     }, 
+758     { 
+759         lng : 83.095126, 
+760         lat : 39.47708 
+761     }, 
+762     { 
+763         lng : 83.072129, 
+764         lat : 39.337923 
+765     }, 
+766     { 
+767         lng : 83.021537, 
+768         lat : 39.216379 
+769     }, 
+770     { 
+771         lng : 82.99854, 
+772         lat : 39.159108 
+773     }, 
+774     { 
+775         lng : 83.219308, 
+776         lat : 39.47708 
+777     }, 
+778     { 
+779         lng : 83.315893, 
+780         lat : 39.387909 
+781     }, 
+782     { 
+783         lng : 83.380284, 
+784         lat : 39.312917 
+785     }, 
+786     { 
+787         lng : 83.47687, 
+788         lat : 39.259301 
+789     }, 
+790     { 
+791         lng : 83.596452, 
+792         lat : 39.202065 
+793     }, 
+794     { 
+795         lng : 84.714088, 
+796         lat : 40.249767 
+797     }, 
+798     { 
+799         lng : 84.626701, 
+800         lat : 40.228618 
+801     }, 
+802     { 
+803         lng : 84.49332, 
+804         lat : 40.179244 
+805     }, 
+806     { 
+807         lng : 84.364539, 
+808         lat : 40.151014 
+809     }, 
+810     { 
+811         lng : 84.240358, 
+812         lat : 40.112178 
+813     }, 
+814     { 
+815         lng : 84.148371, 
+816         lat : 40.080387 
+817     }, 
+818     { 
+819         lng : 84.111577, 
+820         lat : 39.992 
+821     }, 
+822     { 
+823         lng : 84.139172, 
+824         lat : 39.914124 
+825     }, 
+826     { 
+827         lng : 84.198964, 
+828         lat : 39.818426 
+829     }, 
+830     { 
+831         lng : 84.014991, 
+832         lat : 39.690621 
+833     }, 
+834     { 
+835         lng : 84.175967, 
+836         lat : 39.708386 
+837     }, 
+838     { 
+839         lng : 84.318546, 
+840         lat : 39.751003 
+841     }, 
+842     { 
+843         lng : 84.479522, 
+844         lat : 39.743902 
+845     }, 
+846     { 
+847         lng : 84.612903, 
+848         lat : 39.772302 
+849     }, 
+850     { 
+851         lng : 84.810674, 
+852         lat : 39.782949 
+853     }, 
+854     { 
+855         lng : 84.976249, 
+856         lat : 39.807785 
+857     }, 
+858     { 
+859         lng : 85.114229, 
+860         lat : 39.829066 
+861     }, 
+862     { 
+863         lng : 84.589906, 
+864         lat : 40.101583 
+865     }, 
+866     { 
+867         lng : 84.589906, 
+868         lat : 40.009687 
+869     }, 
+870     { 
+871         lng : 84.589906, 
+872         lat : 39.892869 
+873     }, 
+874     { 
+875         lng : 84.580708, 
+876         lat : 39.676405 
+877     }, 
+878     { 
+879         lng : 84.571509, 
+880         lat : 39.519841 
+881     }, 
+882     { 
+883         lng : 84.571509, 
+884         lat : 39.362921 
+885     }, 
+886     { 
+887         lng : 84.576108, 
+888         lat : 39.255725 
+889     }, 
+890     { 
+891         lng : 84.576108, 
+892         lat : 39.166269 
+893     }, 
+894     { 
+895         lng : 84.465724, 
+896         lat : 39.64441 
+897     }, 
+898     { 
+899         lng : 84.350741, 
+900         lat : 39.566136 
+901     }, 
+902     { 
+903         lng : 84.240358, 
+904         lat : 39.480645 
+905     }, 
+906     { 
+907         lng : 84.024189, 
+908         lat : 39.35578 
+909     }, 
+910     { 
+911         lng : 84.139172, 
+912         lat : 39.427159 
+913     }, 
+914     { 
+915         lng : 84.695691, 
+916         lat : 39.694174 
+917     }, 
+918     { 
+919         lng : 84.815273, 
+920         lat : 39.605284 
+921     }, 
+922     { 
+923         lng : 84.916458, 
+924         lat : 39.516279 
+925     }, 
+926     { 
+927         lng : 85.036041, 
+928         lat : 39.452124 
+929     }, 
+930     { 
+931         lng : 85.123428, 
+932         lat : 39.402184 
+933     }, 
+934     { 
+935         lng : 85.224613, 
+936         lat : 39.352209 
+937     }, 
+938     { 
+939         lng : 85.376391, 
+940         lat : 39.298623 
+941     }, 
+942     { 
+943         lng : 85.500572, 
+944         lat : 39.373631 
+945     }, 
+946     { 
+947         lng : 85.51437, 
+948         lat : 39.537651 
+949     }, 
+950     { 
+951         lng : 85.348795, 
+952         lat : 39.555455 
+953     }, 
+954     { 
+955         lng : 85.24761, 
+956         lat : 39.480645 
+957     }, 
+958     { 
+959         lng : 81.407174, 
+960         lat : 40.573219 
+961     }, 
+962     { 
+963         lng : 81.250797, 
+964         lat : 40.618798 
+965     }, 
+966     { 
+967         lng : 81.103618, 
+968         lat : 40.639824 
+969     }, 
+970     { 
+971         lng : 80.95644, 
+972         lat : 40.63632 
+973     }, 
+974     { 
+975         lng : 80.901248, 
+976         lat : 40.562697 
+977     }, 
+978     { 
+979         lng : 80.951841, 
+980         lat : 40.47143 
+981     }, 
+982     { 
+983         lng : 81.057625, 
+984         lat : 40.383557 
+985     }, 
+986     { 
+987         lng : 81.204804, 
+988         lat : 40.327257 
+989     }, 
+990     { 
+991         lng : 81.388777, 
+992         lat : 40.306132 
+993     }, 
+994     { 
+995         lng : 81.526756, 
+996         lat : 40.288523 
+997     }, 
+998     { 
+999         lng : 81.696931, 
+1000         lat : 40.277955 
+1001     }, 
+1002     { 
+1003         lng : 81.526756, 
+1004         lat : 40.65734 
+1005     }, 
+1006     { 
+1007         lng : 81.563551, 
+1008         lat : 40.804295 
+1009     }, 
+1010     { 
+1011         lng : 81.696931, 
+1012         lat : 40.846222 
+1013     }, 
+1014     { 
+1015         lng : 81.830312, 
+1016         lat : 40.83225 
+1017     }, 
+1018     { 
+1019         lng : 81.922298, 
+1020         lat : 40.751849 
+1021     }, 
+1022     { 
+1023         lng : 81.926898, 
+1024         lat : 40.653837 
+1025     }, 
+1026     { 
+1027         lng : 81.9131, 
+1028         lat : 40.552172 
+1029     }, 
+1030     { 
+1031         lng : 81.885504, 
+1032         lat : 40.48548 
+1033     }, 
+1034     { 
+1035         lng : 81.848709, 
+1036         lat : 40.387074 
+1037     }, 
+1038     { 
+1039         lng : 81.793517, 
+1040         lat : 40.313174 
+1041     } 
+1042 ]; 
+1043  
+1044 function addMarker(lng, lat) { 
+1045     var marker = new BMap.Marker( new BMap.Point(lng, lat) ); 
+1046     marker.setAnimation(BMAP_ANIMATION_DROP); 
+1047     map.addOverlay(marker) 
+1048 } 
+1049  
+1050 if (!Array.prototype.shuffle) { 
+1051     Array.prototype.shuffle = function() { 
+1052         for(var j, x, i = this.length; i; j = parseInt(Math.random() * i), x = this[--i], this[i] = this[j], this[j] = x); 
+1053         return this; 
+1054     }; 
+1055 } 
+1056 markerText.shuffle(); 
+1057 function loopAddMarker(markers, callback) { 
+1058     var i           = 0; 
+1059     var len         = markers.length; 
+1060     var callback    = callback || function() {}; 
+1061     var loop        = ''; 
+1062     function loopAddMarkerInner() { 
+1063         if( i == len ) { 
+1064             clearTimeout(loop); 
+1065             callback(); 
+1066             return false; 
+1067         } 
+1068         addMarker(markers[i].lng, markers[i].lat); 
+1069         i++; 
+1070         loop = setTimeout(loopAddMarkerInner, 300); 
+1071     } 
+1072     loopAddMarkerInner(); 
+1073 } 
+1074  
+1075 function showMarkerText() { 
+1076     map.closeInfoWindow(); 
+1077     map.panTo(new BMap.Point(82.699584, 39.8202)); 
+1078     setTimeout(function() { 
+1079         zoomTo(9, 1000, function() { 
+1080             loopAddMarker(markerText, function() { 
+1081                 setTimeout(function() { 
+1082                     slideDown('theEnd', 1000, function() { 
+1083                         var theEndText = '<div id="theEndText">Happy birthday to my dearest Meijun :) --by LOO2K<br />' +  
+1084                                          '<button data-toggle="wshare" data-type="weibo">分享到微博</button>' +  
+1085                                          '<button onclick="window.location.reload();">再看一次</button></div>'; 
+1086                         document.getElementById('theEnd').innerHTML = theEndText; 
+1087                     }); 
+1088                 }, 5000); 
+1089             }); 
+1090         }) 
+1091     }, 1000); 
+1092 } 
+1093  
+1094 function slideDown(id, speed, callback) { 
+1095     var object  = document.getElementById(id); 
+1096     var timeout = speed*0.001; 
+1097     var callback= callback || function() {}; 
+1098     var loop    = ''; 
+1099     object.style.display = 'block'; 
+1100     object.style.height = '0%'; 
+1101     function slideDownInner() { 
+1102         var curHeight = parseFloat(object.style.height) || 0; 
+1103         if( curHeight >= 100 ) { 
+1104             clearTimeout(loop); 
+1105             callback(); 
+1106             return false; 
+1107         } 
+1108         object.style.height = (curHeight + 0.1) + '%'; 
+1109         loop = setTimeout(slideDownInner, timeout); 
+1110     } 
+1111     slideDownInner(); 
+1112 } 
+1113  
+1114 function preLoadImages(imagesList, callback) { 
+1115     var len     = imagesList.length; 
+1116     var i       = 0; 
+1117     var images  = {}; 
+1118     var callback = callback || function() {}; 
+1119     function loadImage() { 
+1120         if( i == len ) { 
+1121             callback(); 
+1122             return false; 
+1123         } 
+1124         images[i]           = new Image(); 
+1125         images[i].src       = imagesList[i]; 
+1126         i++; 
+1127         loadImage(); 
+1128     } 
+1129     loadImage(); 
+1130 } 
+1131  
+1132 var map; 
+1133  
+1134 function initMap() { 
+1135     map = new BMap.Map("map"); 
+1136     var point = new BMap.Point(MP_CEN.lng, MP_CEN.lat); 
+1137     map.centerAndZoom(point, 4); 
+1138     map.disableDragging(); 
+1139     map.disableDoubleClickZoom(); 
+1140     init(); 
+1141 } 
+1142  
+1143 function init() { 
+1144     document.getElementById('loading').style.display = 'none'; 
+1145     document.getElementById('theEnd').style.height = '0'; 
+1146     document.getElementById('theEnd').innerHTML = ''; 
+1147     map.setMapType(BMAP_NORMAL_MAP); 
+1148     var point = new BMap.Point(MP_CEN.lng, MP_CEN.lat); 
+1149     map.centerAndZoom(point, 4); 
+1150     map.clearOverlays(); 
+1151     map.reset(); 
+1152     MUSIC.play(); 
+1153     map.panTo(new BMap.Point(GZ_GTC.lng, GZ_GTC.lat)); 
+1154     panZoom_GTC(); 
+1155 } 
+1156   
+1157 function loadScript() { 
+1158   var script = document.createElement("script"); 
+1159   script.src = "http://api.map.baidu.com/api?v=1.2&callback=initMap"; 
+1160   document.body.appendChild(script); 
+1161 } 
+1162  
+1163 window.onload = function() { 
+1164     var imglist = [ 
+1165         'http://lukesign.qiniudn.com/images/ticket.jpg', 
+1166         'http://lukesign.qiniudn.com/images/beijingroad.jpg', 
+1167         'http://lukesign.qiniudn.com/images/chenjiaci.jpg', 
+1168         'http://lukesign.qiniudn.com/images/chenjiaci1.jpg', 
+1169         'http://lukesign.qiniudn.com/images/chenjiaci2.jpg', 
+1170         'http://lukesign.qiniudn.com/images/dianying.jpg', 
+1171         'http://lukesign.qiniudn.com/images/dress1.jpg', 
+1172         'http://lukesign.qiniudn.com/images/dress2.jpg', 
+1173         'http://lukesign.qiniudn.com/images/jiniantang.jpg', 
+1174         'http://lukesign.qiniudn.com/images/leave.jpg', 
+1175         'http://lukesign.qiniudn.com/images/s.jpg', 
+1176         'http://lukesign.qiniudn.com/images/sea.jpg', 
+1177         'http://lukesign.qiniudn.com/images/you.jpg', 
+1178         'http://lukesign.qiniudn.com/images/wannato/fenghuang.jpg', 
+1179         'http://lukesign.qiniudn.com/images/wannato/guilin.jpg', 
+1180         'http://lukesign.qiniudn.com/images/wannato/xiamen.jpg', 
+1181         'http://lukesign.qiniudn.com/images/wannato/xihu.jpg', 
+1182         'http://lukesign.qiniudn.com/images/wannato/xizang.jpg' 
+1183     ]; 
+1184  
+1185     soundManager.setup({ 
+1186         url: 'http://lukesign.qiniudn.com/sm/', 
+1187         onready: initMP3 
+1188     }); 
+1189  
+1190     function initMP3() { 
+1191  
+1192         MUSIC = soundManager.createSound({ 
+1193             id: 'mp3', 
+1194             url: './LemonTree.mp3', 
+1195             onload: function() { 
+1196                 preLoadImages(imglist, function() { 
+1197                     setTimeout(function() { 
+1198                         var loading = document.getElementById('loading'); 
+1199                         loading.style.cursor = 'pointer'; 
+1200                         loading.innerHTML = '点击开始'; 
+1201                         loading.onclick = function() { 
+1202                             screenfull && screenfull.request(); 
+1203                             loadScript(); 
+1204                         } 
+1205                     }, 3000); 
+1206                 }); 
+1207             } 
+1208         }); 
+1209         MUSIC.load(); 
+1210     } 
+1211 }; 
+1212 </script> 
+1213 <script> 
+1214 var _hmt = _hmt || []; 
+1215 (function() { 
+1216   var hm = document.createElement("script"); 
+1217   hm.src = "//hm.baidu.com/hm.js?c142366bae08a5add7c3c1ce2703b10d"; 
+1218   var s = document.getElementsByTagName("script")[0];  
+1219   s.parentNode.insertBefore(hm, s); 
+1220 })(); 
+1221 </script> 
+1222 </body> 
+1223 </html> 
+ 
+
+
+ 
+   
+
+Status
+ API
+ Training
+ Shop
+ Blog
+ About
+   © 2014 GitHub, Inc.
+ Terms
+ Privacy
+ Security
+ Contact
+   
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
